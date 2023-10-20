@@ -42,7 +42,6 @@ binit(void)
 
   initlock(&bcache.lock, "bcache");
 
-//PAGEBREAK!
   // Create linked list of buffers
   bcache.head.prev = &bcache.head;
   bcache.head.next = &bcache.head;
@@ -136,9 +135,8 @@ brelse(struct buf *b)
     bcache.head.next->prev = b;
     bcache.head.next = b;
   }
-  
+
   release(&bcache.lock);
 }
-//PAGEBREAK!
 // Blank page.
 

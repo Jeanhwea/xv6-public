@@ -30,7 +30,7 @@ main(void)
   tvinit();        // trap vectors
   binit();         // buffer cache
   fileinit();      // file table
-  ideinit();       // disk 
+  ideinit();       // disk
   startothers();   // start other processors
   kinit2(P2V(4*1024*1024), P2V(PHYSTOP)); // must come after startothers()
   userinit();      // first user process
@@ -107,10 +107,6 @@ pde_t entrypgdir[NPDENTRIES] = {
   [KERNBASE>>PDXSHIFT] = (0) | PTE_P | PTE_W | PTE_PS,
 };
 
-//PAGEBREAK!
 // Blank page.
-//PAGEBREAK!
 // Blank page.
-//PAGEBREAK!
 // Blank page.
-

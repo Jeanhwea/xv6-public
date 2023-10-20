@@ -1,7 +1,7 @@
 # The xv6 kernel starts executing in this file. This file is linked with
 # the kernel C code, so it can refer to kernel symbols such as main().
 # The boot block (bootasm.S and bootmain.c) jumps to entry below.
-        
+
 # Multiboot header, for multiboot boot loaders like GNU Grub.
 # http://www.gnu.org/software/grub/manual/multiboot/multiboot.html
 #
@@ -10,12 +10,12 @@
 # and then adding this menu entry:
 #
 # menuentry "xv6" {
-# 	insmod ext2
-# 	set root='(hd0,msdos1)'
-# 	set kernel='/boot/kernel'
-# 	echo "Loading ${kernel}..."
-# 	multiboot ${kernel} ${kernel}
-# 	boot
+#	insmod ext2
+#	set root='(hd0,msdos1)'
+#	set kernel='/boot/kernel'
+#	echo "Loading ${kernel}..."
+#	multiboot ${kernel} ${kernel}
+#	boot
 # }
 
 #include "asm.h"
