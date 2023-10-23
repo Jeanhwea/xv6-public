@@ -31,7 +31,7 @@ OBJS = \
 # Cross-compiling (e.g., on Mac OS X)
 # TOOLPREFIX = i386-jos-elf
 #TOOLPREFIX = i386-elf-
-ifndef TOOLPREFIX
+ifneq ($(shell uname), Linux)
 	TOOLPREFIX = i386-elf-
 endif
 
