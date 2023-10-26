@@ -138,5 +138,3 @@ brelse(struct buf *b)
 
   release(&bcache.lock);
 }
-// Blank page.
-
