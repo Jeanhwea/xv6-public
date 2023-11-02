@@ -16,3 +16,6 @@ mkfs
 .gdbinit
 compile_commands.json
 .cache
+*.ini
+bochsout.txt
+*.lock

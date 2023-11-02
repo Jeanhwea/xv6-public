@@ -200,8 +200,7 @@ clean:
 
 # run in emulators
 bochs : fs.img xv6.img
-	if [ ! -e .bochsrc ]; then ln -s dot-bochsrc .bochsrc; fi
-	bochs -q
+	bochs -q -f bochsrc.bxrc
 
 # try to generate a unique GDB port
 GDBPORT = $(shell expr `id -u` % 5000 + 25000)
@@ -258,15 +257,6 @@ dist:
 	echo >dist/runoff.spec
 	cp $(EXTRA) dist
 
-dist-test:
-	rm -rf dist
-	make dist
-	rm -rf dist-test
-	mkdir dist-test
-	cp dist/* dist-test
-	cd dist-test; $(MAKE) print
-	cd dist-test; $(MAKE) bochs || true
-	cd dist-test; $(MAKE) qemu
 
 # update this rule (change rev#) when it is time to
 # make a new revision.
