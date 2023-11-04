@@ -19,3 +19,5 @@ compile_commands.json
 *.ini
 bochsout.txt
 *.lock
+TAGS
+tags
