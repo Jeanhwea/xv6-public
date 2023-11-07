@@ -51,6 +51,7 @@ freerange(void *vstart, void *vend)
   for(; p + PGSIZE <= (char*)vend; p += PGSIZE)
     kfree(p);
 }
+
 // Free the page of physical memory pointed at by v,
 // which normally should have been returned by a
 // call to kalloc().  (The exception is when
@@ -92,4 +93,3 @@ kalloc(void)
     release(&kmem.lock);
   return (char*)r;
 }
-
