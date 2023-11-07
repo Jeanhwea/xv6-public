@@ -1,41 +1,29 @@
 # -*- mode: gdb-script; -*-
 
-define pva
+define kfree
+  set $p = kmem.freelist
+  set $len = 0
+  while $p
+    if $len < 10
+        printf "%d:\t %p\n", $len, $p
+    end
+    set $p = $p->next
+    set $len = $len + 1
+  end
+printf "total=%d\n", $len
+end
+
+define idx
     set $va = $arg0
     set $pdi = ($va >> 22) & 0x3ff
     set $pti = ($va >> 12) & 0x3ff
     set $off = ($va & 0xfff)
-    printf "VA(0x%x): 0x%x 0x%x 0x%x\n", $va, $pdi, $pti, $off
-
-    printf "CR3(0x%x)\n", $cr3
-    x/4x $cr3
-    printf "----------------------------------------\n"
-
-    set $pdb = $cr3 + ($pdi * 4)
-    printf "Dir Base: 0x%x:\n", $pdb
-    x/4x $pdb
-    set $pde = (unsigned int) *$pdb
-    printf "Dir Entry: 0x%x\n", $pde
-
-    printf "----------------------------------------\n"
-
-    set $ptb = ($pde & ~0xfff) + ($pti * 4)
-    printf "Table Base: 0x%x:\n", $ptb
-    x/4x $ptb
-    set $pte = (unsigned int) *$ptb
-    printf "Table Entry: 0x%x\n", $pte
-
-    set $pa = ($pte & ~0xfff) | $off
-    printf "PA: 0x%x\n", $pa
+    printf "VA(0x%x): PDX=0x%x PTX=0x%x OFFSET=0x%x\n", $va, $pdi, $pti, $off
 end
 
-define plist
-  set $p = $arg0
-  set $len = 0
-  while $p
-    printf "%d:\t %p\n", $len, $p
-    # print *($p)
-    set $p = $p->next
-    set $len = $len + 1
-  end
+define ppn
+    set $pte = $arg0
+    set $ppn = $pte & ~0xfff
+    set $flag = $pte & 0xfff
+    printf "PTE(0x%x): PPN=0x%x FLAGS=0x%x\n", $pte, $ppn, $flag
 end
