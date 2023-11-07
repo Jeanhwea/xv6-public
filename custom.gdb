@@ -4,8 +4,9 @@ define kfree
   set $p = kmem.freelist
   set $len = 0
   while $p
-    if $len < 10
-        printf "%d:\t %p\n", $len, $p
+    if $len < 9
+        printf "%d\t: %p\n", 1+$len, $p
+        # p/x *($p)
     end
     set $p = $p->next
     set $len = $len + 1
