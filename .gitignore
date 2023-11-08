@@ -19,6 +19,7 @@ compile_commands.json
 .cache
 *.ini
 bochsout.txt
+gdbout.txt
 *.lock
 TAGS
 tags
