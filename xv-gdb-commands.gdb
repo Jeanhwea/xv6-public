@@ -53,3 +53,16 @@ define xv-freelist
   set $fsz = $len * 1024 * 1024
   printf "total=%d size=%.2fM %d\n", $len, (float) ($fsz) / (1024*1024), $fsz
 end
+
+define xv-list-cpus
+  set $cpui = 0
+  while $cpui < 8
+    set $cpu = cpus[$cpui]
+
+    printf "CPU %d: apicid:0x%x, started=%d, ncli=%d\n", $cpui, $cpu.apicid, $cpu.started, $cpu.ncli 
+
+    # p/x $cpu.proc
+    # p/x $cpu.ts
+    set $cpui = $cpui + 1
+  end
+end
