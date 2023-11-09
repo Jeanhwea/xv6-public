@@ -33,7 +33,9 @@ define xv-freelist
     set $p = $p->next
     set $len = $len + 1
   end
-  printf "total=%d\n", $len
+
+  $freesize = $len * 1024 * 1024
+  printf "total=%d size=%d\n", $len, $freesize
 end
 
 define xv-idx
