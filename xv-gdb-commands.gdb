@@ -1,5 +1,5 @@
 # -*- mode: gdb-script; -*-
-define v2p
+define xv-v2p
   set $va = $arg0
   set $pdx = ($va >> 22) & 0x3ff
   set $ptx = ($va >> 12) & 0x3ff
@@ -22,7 +22,7 @@ define v2p
   printf "Summary: VA=0x%08x -> PA=0x%08x\n", $va, $pa
 end
 
-define freemem
+define xv-freelist
   set $p = kmem.freelist
   set $len = 0
   while $p
@@ -34,4 +34,19 @@ define freemem
     set $len = $len + 1
   end
   printf "total=%d\n", $len
+end
+
+define xv-idx
+  set $va = $arg0
+  set $pdx = ($va >> 22) & 0x3ff
+  set $ptx = ($va >> 12) & 0x3ff
+  set $off = ($va & 0xfff)
+  printf "VA(0x%x): PDX=0x%x PTX=0x%x OFFSET=0x%x\n", $va, $pdx, $ptx, $off
+end
+
+define xv-ppn
+  set $pte = $arg0
+  set $ppn = $pte & ~0xfff
+  set $flag = $pte & 0xfff
+  printf "PTE(0x%x): PPN=0x%x FLAGS=0x%x\n", $pte, $ppn, $flag
 end
