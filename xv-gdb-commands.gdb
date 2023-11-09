@@ -1,4 +1,19 @@
 # -*- mode: gdb-script; -*-
+define xv-idx
+  set $va = $arg0
+  set $pdx = ($va >> 22) & 0x3ff
+  set $ptx = ($va >> 12) & 0x3ff
+  set $off = ($va & 0xfff)
+  printf "VA(0x%x): PDX=0x%x PTX=0x%x OFFSET=0x%x\n", $va, $pdx, $ptx, $off
+end
+
+define xv-pte
+  set $pte = $arg0
+  set $ppn = $pte & ~0xfff
+  set $flag = $pte & 0xfff
+  printf "PTE(0x%x): PPN=0x%x FLAGS=0x%x\n", $pte, $ppn, $flag
+end
+
 define xv-v2p
   set $va = $arg0
   set $pdx = ($va >> 22) & 0x3ff
@@ -37,19 +52,4 @@ define xv-freelist
 
   set $fsz = $len * 1024 * 1024
   printf "total=%d size=%.2fM %d\n", $len, (float) ($fsz) / (1024*1024), $fsz
-end
-
-define xv-idx
-  set $va = $arg0
-  set $pdx = ($va >> 22) & 0x3ff
-  set $ptx = ($va >> 12) & 0x3ff
-  set $off = ($va & 0xfff)
-  printf "VA(0x%x): PDX=0x%x PTX=0x%x OFFSET=0x%x\n", $va, $pdx, $ptx, $off
-end
-
-define xv-pte
-  set $pte = $arg0
-  set $ppn = $pte & ~0xfff
-  set $flag = $pte & 0xfff
-  printf "PTE(0x%x): PPN=0x%x FLAGS=0x%x\n", $pte, $ppn, $flag
 end
