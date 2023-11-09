@@ -27,7 +27,7 @@ define xv-freelist
   set $len = 0
   while $p
     if $len < 9
-      printf "%d\t: %p\n", 1+$len, $p
+      printf "%d: %p\n", 1+$len, $p
       # x/8x $p
       # p/x *($p)
     end
