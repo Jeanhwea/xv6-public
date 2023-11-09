@@ -28,6 +28,7 @@ define xv-freelist
   while $p
     if $len < 9
       printf "%d\t: %p\n", 1+$len, $p
+      # x/8x $p
       # p/x *($p)
     end
     set $p = $p->next
@@ -35,7 +36,7 @@ define xv-freelist
   end
 
   set $fsz = $len * 1024 * 1024
-  printf "total=%d size=%d\n", $len, $fsz
+  printf "total=%d size=%.2fM %d\n", $len, (float) ($fsz) / (1024*1024), $fsz
 end
 
 define xv-idx
