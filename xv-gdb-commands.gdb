@@ -44,7 +44,7 @@ define xv-idx
   printf "VA(0x%x): PDX=0x%x PTX=0x%x OFFSET=0x%x\n", $va, $pdx, $ptx, $off
 end
 
-define xv-ppn
+define xv-pte
   set $pte = $arg0
   set $ppn = $pte & ~0xfff
   set $flag = $pte & 0xfff
