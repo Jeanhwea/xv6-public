@@ -50,8 +50,8 @@ define xv-freelist
     set $len = $len + 1
   end
 
-  set $fsz = $len * 1024 * 1024
-  printf "total=%d size=%.2fM %d\n", $len, (float) ($fsz) / (1024*1024), $fsz
+  set $fsz = $len * 4
+  printf "total=%d size=%.2fM\n", $len, (float) $fsz / 1024
 end
 
 define xv-list-cpus
