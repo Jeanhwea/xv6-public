@@ -40,6 +40,7 @@ end
 define xv-freelist
   set $p = kmem.freelist
   set $len = 0
+  printf "Top pages:\n"
   while $p
     if $len < 9
       printf "#%d: %p\n", 1+$len, $p
@@ -51,7 +52,7 @@ define xv-freelist
   end
 
   set $fsz = $len * 4
-  printf "Summary: %d pages, size of %.2fM\n", $len, (float) $fsz / 1024
+  printf "Summary: %d pages, total %.2fMb\n", $len, (float) $fsz / 1024
 end
 
 define xv-list-cpus
