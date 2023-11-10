@@ -40,7 +40,7 @@ end
 define xv-freelist
   set $p = kmem.freelist
   set $len = 0
-  printf "Top Free Page Dumps:\n"
+  printf "Top Free Page Dumps\n"
   while $p
     if $len < 9
       printf "#%d: %p\n", 1+$len, $p
