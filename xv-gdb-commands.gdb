@@ -51,7 +51,7 @@ define xv-freelist
   end
 
   set $fsz = $len * 4
-  printf "total=%d pages, size=%.2fM\n", $len, (float) $fsz / 1024
+  printf "Summary: %d pages, size of %.2fM\n", $len, (float) $fsz / 1024
 end
 
 define xv-list-cpus
