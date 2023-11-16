@@ -58,9 +58,11 @@ end
 define xv-ps
   set $i = 0
   while $i < 64
-    set $p = ptable.proc[$i]
+    set var $p = ptable.proc[$i]
     if $p.pid > 0
       printf "ptable.proc[%d]: pid=%d state=%d name=%s\n", $i, $p.pid, $p.state, ptable.proc[$i].name
+      p $p
+      # printf "ptable.proc[%d]: pid=%d state=%d name=%s\n", $i, $p.pid, $p.state, $p.name
     end
     set $i = $i + 1
   end
@@ -71,7 +73,7 @@ define xv-list-cpus
   while $cpui < 8
     set $cpu = cpus[$cpui]
 
-    printf "CPU %d: apicid:0x%x, started=%d, ncli=%d\n", $cpui, $cpu.apicid, $cpu.started, $cpu.ncli 
+    printf "CPU %d: apicid:0x%x, started=%d, ncli=%d\n", $cpui, $cpu.apicid, $cpu.started, $cpu.ncli
 
     # p/x $cpu.proc
     # p/x $cpu.ts
