@@ -60,7 +60,7 @@ define xv-ps
   while $i < 64
     set $p = ptable.proc[$i]
     if $p.pid > 0
-      printf "%d: pid=%d state=%d\n", $i, $p.pid, $p.state
+      printf "ptable.proc[%d]: pid=%d state=%d name=%s\n", $i, $p.pid, $p.state, ptable.proc[$i].name
     end
     set $i = $i + 1
   end
