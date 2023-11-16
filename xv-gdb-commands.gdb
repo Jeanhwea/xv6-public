@@ -55,6 +55,17 @@ define xv-freelist
   printf "Summary: %d pages, total %.2fMb\n", $len, (float) $fsz / 1024
 end
 
+define xv-ps
+  set $i = 0
+  while $i < 64
+    set $p = ptable.proc[$i]
+    if $p.pid > 0
+      printf "%d: pid=%d state=%d\n", $i, $p.pid, $p.state
+    end
+    set $i = $i + 1
+  end
+end
+
 define xv-list-cpus
   set $cpui = 0
   while $cpui < 8
