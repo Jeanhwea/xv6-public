@@ -61,8 +61,7 @@ define xv-ps
     set var $p = ptable.proc[$i]
     if $p.pid > 0
       printf "ptable.proc[%d]: pid=%d state=%d name=%s\n", $i, $p.pid, $p.state, ptable.proc[$i].name
-      p $p
-      # printf "ptable.proc[%d]: pid=%d state=%d name=%s\n", $i, $p.pid, $p.state, $p.name
+      # p $p
     end
     set $i = $i + 1
   end
