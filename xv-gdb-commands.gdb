@@ -67,6 +67,10 @@ define xv-ps
   end
 end
 
+define xv-ctx
+  printf "ctx: cs=0x%x eip=0x%x ss=0x%x esp=0x%x eflags=0x%x\n", $cs, $eip, $ss, $esp, $eflags
+end
+
 define xv-list-cpus
   set $cpui = 0
   while $cpui < 8
