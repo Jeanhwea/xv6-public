@@ -55,7 +55,7 @@ define xv-freelist
   printf "Summary: %d pages, total %.2fMb\n", $len, (float) $fsz / 1024
 end
 
-define xv-idequeue
+define xv-queue
   set $p = idequeue
   set $len = 0
   printf "Dump IDE Queue buf ...\n"
