@@ -65,7 +65,7 @@ define xv-bufs
       # x/8x $p
       # p/x *($p)
     end
-    set $p = $p->next
+    set $p = $p->qnext
     set $len = $len + 1
   end
 
