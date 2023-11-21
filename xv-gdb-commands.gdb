@@ -72,11 +72,10 @@ end
 
 define xv-bcache
   set $p = bcache.head.next
-  set $len = 0
   printf "Dump bcache ...\n"
   while $p != &bcache.head
     if $len < 50
-      printf "#%02d: dev=%d, blockno=%d, refcnt=%d, curr=%p, prev=%p, next=%p, qnext=%p\n", 1+$len, $p->dev, $p->blockno, $p->refcnt, $p, $p->prev, $p->next, $p->qnext
+      printf "#%02d: dev=%d, blockno=%d, refcnt=%d, prev=%02d, next=%02d, qnext=%p\n", (int)($p-bcache.buf), $p->dev, $p->blockno, $p->refcnt, (int)($p->prev-bcache.buf), (int)($p->next-bcache.buf), $p->qnext
       # x/8x $p
       # p/x *($p)
     end
