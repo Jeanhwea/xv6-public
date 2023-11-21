@@ -55,6 +55,23 @@ define xv-freelist
   printf "Summary: %d pages, total %.2fMb\n", $len, (float) $fsz / 1024
 end
 
+define xv-bufs
+  set $p = idequeue
+  set $len = 0
+  printf "Dump IDE Queue buf ...\n"
+  while $p
+    if $len < 9
+      printf "#%d: dev=%d, blockno=%d, refcnt=%d\n", 1+$len, $p->dev, $p->blockno, $p->refcnt
+      # x/8x $p
+      # p/x *($p)
+    end
+    set $p = $p->next
+    set $len = $len + 1
+  end
+
+  printf "Summary: %d bufs\n", $len
+end
+
 define xv-ps
   set $i = 0
   while $i < 64
