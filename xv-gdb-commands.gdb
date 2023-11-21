@@ -62,8 +62,6 @@ define xv-idequeue
   while $p
     if $len < 9
       printf "#%d: dev=%d, blockno=%d, refcnt=%d\n", 1+$len, $p->dev, $p->blockno, $p->refcnt
-      # x/8x $p
-      # p/x *($p)
     end
     set $p = $p->qnext
     set $len = $len + 1
@@ -78,7 +76,7 @@ define xv-bcache
   printf "Dump bcache ...\n"
   while $p != &bcache.head
     if $len < 50
-      printf "#%d: dev=%d, blockno=%d, refcnt=%d\n", 1+$len, $p->dev, $p->blockno, $p->refcnt
+      printf "#%02d: dev=%d, blockno=%d, refcnt=%d, curr=%p, prev=%p, next=%p, qnext=%p\n", 1+$len, $p->dev, $p->blockno, $p->refcnt, $p, $p->prev, $p->next, $p->qnext
       # x/8x $p
       # p/x *($p)
     end
