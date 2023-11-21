@@ -61,7 +61,8 @@ define xv-idequeue
   printf "Dump IDE Queue buf ...\n"
   while $p
     if $len < 9
-      printf "#%d: dev=%d, blockno=%d, refcnt=%d\n", 1+$len, $p->dev, $p->blockno, $p->refcnt
+      printf "#%d: bcache.buf[%02d], dev=%d, blockno=%d, refcnt=%d, qnext=%p\n", \
+            1+$len, (int)($p-bcache.buf), $p->dev, $p->blockno, $p->refcnt, $p->qnext
     end
     set $p = $p->qnext
     set $len = $len + 1
@@ -76,8 +77,8 @@ define xv-bcache
   printf "Dump bcache ...\n"
   while $p != &bcache.head
     if $len < 50
-      printf "#%02d: addr=%02d, prev=%02d, next=%02d, dev=%d, blockno=%d, refcnt=%d\n", \
-             $len, (int)($p-bcache.buf), (int)($p->prev-bcache.buf), (int)($p->next-bcache.buf), \
+      printf "#%02d: bcache.buf[%02d], prev=%02d, next=%02d, dev=%d, blockno=%d, refcnt=%d\n", \
+             1+$len, (int)($p-bcache.buf), (int)($p->prev-bcache.buf), (int)($p->next-bcache.buf), \
              $p->dev, $p->blockno, $p->refcnt
     end
     set $p = $p->next
